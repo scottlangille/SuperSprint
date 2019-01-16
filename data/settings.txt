@@ -1,0 +1,11 @@
+Setting	Name	Value	ValueType
+soundEnabled	Sound Enabled	true	bool
+ballSpeed	Ball Speed	5.0	float
+ballSpeedIncrement	Ball Speed Inc.	0.3	float
+maxBallSpeed	Max Ball Speed	10.0	float
+maxLives	Max Lives	3	int
+paddleWidth	Paddle Width	70.0	float
+paddleSpeed	Paddle Speed	8.0	float
+paddleDistFromEdge	Paddle Distance From Edge	5	int
+leftKey	Move Left	37	int
+rightKey	Move Right	39	int
