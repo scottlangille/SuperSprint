@@ -1,6 +1,7 @@
 class State_Game implements State {
   
   int track;
+  int timeOfDay;
   
   State_Game() {
     track = 1;

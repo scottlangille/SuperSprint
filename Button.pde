@@ -42,7 +42,7 @@ class Button {
     rect(x,y,w,h);
     
     // Text
-    fill(255);
+    fill(col);
     textFont(font_atari);
     textSize(textSize);
     textAlign(CENTER, CENTER);

@@ -14,7 +14,7 @@ class Tile {
    */
   float x, y, w;
   float left, right, top, bot;
-  Tile(float x, float y) {
+  Tile(int type, float x, float y) {
     this.x = x;
     this.y = y;
     w = 50;
@@ -25,6 +25,9 @@ class Tile {
   }
 
   void render(int tint) {
+    
+    tint(map(timeOfDay, 00, 23, 
+    
     fill(255, 255, 0);
     rect(x, y, w, w);
   }

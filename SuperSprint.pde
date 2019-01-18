@@ -1,6 +1,6 @@
-// SPRINT III
+// SUPER SPRINT
 // Created by Scott Langille & Jacob Kloepper
-// Last updated January 14, 2019
+// Last updated January 18, 2019
 
 /* TODO:
  - 
