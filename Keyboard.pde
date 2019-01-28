@@ -38,3 +38,21 @@ class Keyboard {
     return(keyCodesDown[code]);
   }
 }
+
+void keyPressed() {
+  if (keyCode == ESC && gameStateManager.stackSize() > 1) { // If title screen, exit game. Otherwise:
+    key = 0; // Do not exit
+    gameStateManager.popState(); // Remove the top state
+    return; // Exit the the keyPressed() method
+  }
+
+  gameState.processKey(str(key).toUpperCase().charAt(0), keyCode); // Sends uppercase key and keyCode information.
+
+  if (keyCode < 223)
+    keyboard.pressKey(keyCode); // Store key position in Keyboard object
+}
+
+void keyReleased() {
+  if (keyCode < 223)
+    keyboard.releaseKey(keyCode); // Store key position in Keyboard object
+}

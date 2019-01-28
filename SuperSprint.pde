@@ -1,10 +1,10 @@
 // SUPER SPRINT
 // Created by Scott Langille & Jacob Kloepper
-// Last updated January 18, 2019
+// Last updated January 28, 2019
 
 /* TODO:
- - 
- - 
+ - Car turn/move
+ - Design a few tiles
  - 
  */
 
@@ -17,7 +17,7 @@ import ddf.minim.*;
 Minim minim;
 
 void setup() {
-  size(1080, 720);
+  size(1080, 720); // 36x24 tiles; each tile is 30x30 pixels
 
   keyboard = new Keyboard();
   gameStateManager = new GameStateManager();
@@ -43,25 +43,6 @@ void draw() {
   gameState.render();
 
   popStyle();
-}
-
-void keyPressed() {
-  if (keyCode == ESC && gameStateManager.stackSize() > 1) { // If title screen, exit game. Otherwise:
-    key = 0; // Do not exit
-    gameStateManager.popState(); // Remove the top state
-    return; // Exit the the keyPressed() method
-  }
-
-
-  gameState.processKey(str(key).toUpperCase().charAt(0), keyCode); // Sends uppercase key and keyCode information.
-
-  if (keyCode < 223)
-    keyboard.pressKey(keyCode); // Store key position in Keyboard object
-}
-
-void keyReleased() {
-  if (keyCode < 223)
-    keyboard.releaseKey(keyCode); // Store key position in Keyboard object
 }
 
 void mousePressed() {
@@ -93,8 +74,46 @@ void setupFonts() {
 // IMAGES //////////////
 PImage img_TitleScreen;
 
+PImage img_tile0;
+PImage img_tile1;
+PImage img_tile2;
+PImage img_tile3;
+PImage img_tile4;
+PImage img_tile5;
+PImage img_tile6;
+PImage img_tile7;
+PImage img_tile8;
+PImage img_tile9;
+PImage img_tile10;
+
+/*
+   00 barrier
+ 01 road1
+ 02 road2  
+ 03 road3
+ 04 checkpoint
+ 05 grass
+ 06 oil
+ 07 sand
+ 08 ice
+ 09 finish line
+ 10 scenery
+ */
+
 void setupImages() {
   img_TitleScreen = loadImage("titlescreen.jpg");
+
+  // img_tile0 = loadImage("tile_barrier.jpg");
+  img_tile1 = loadImage("tile_road1.jpg");
+  //img_tile2 = loadImage("tile_road2.jpg");
+  //img_tile3 = loadImage("tile_road3.jpg");
+  //img_tile4 = loadImage("tile_checkpoint.jpg");
+  //img_tile5 = loadImage("tile_grass.jpg");
+  //img_tile6 = loadImage("tile_oil.jpg");
+  //img_tile7 = loadImage("tile_sand.jpg");
+  //img_tile8 = loadImage("tile_ice.jpg");
+  //img_tile9 = loadImage("tile_finishline.jpg");
+  img_tile10 = loadImage("tile_scenery.jpg");
 }
 ////////////////////////
 

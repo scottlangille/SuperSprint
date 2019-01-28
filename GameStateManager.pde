@@ -3,7 +3,7 @@ class GameStateManager {
 
   void reset() {
     stack.clear();
-    stack.add(new State_TitleScreen());
+    stack.add(new State_Game()); // change to title screen later!!!!
     updateGameState();
   }
 
