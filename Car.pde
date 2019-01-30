@@ -15,11 +15,14 @@ class Car {
 
   // Hitbox variables
   float top, bot, left, right;
+  //float topL, topR, botL, botR;
 
   color col;
 
   boolean drivingForward;
   boolean drivingBackward;
+
+  boolean nitro;
 
   Car(float x, float y, color col) {
     this.x = x;
@@ -79,18 +82,15 @@ class Car {
     if (abs(speed) < 0.01)
       speed = 0;
 
-    move();
-
-    //println(speed);
-    println("speed = " + speed + "; dir = " + dir + "; wheelDir = " + wheelDir);
+    //println("speed = " + speed + "; dir = " + dir + "; wheelDir = " + wheelDir);
     wheelDir = constrain(wheelDir, dir-QUARTER_PI, dir+QUARTER_PI);
   }
+  
   void move() { // Actually move the car
-
     x += speed * cos(wheelDir);
     y += speed * sin(wheelDir);
 
-    alignBodyWithWheels();
+    dir += alignBodyWithWheels();
 
     pushMatrix();
     translate(x, y);
@@ -101,13 +101,26 @@ class Car {
     right = 0+w/2;
     popMatrix();
   }
+  
+  Float[] checkMove() { // Hypothetical move
+    float x_ = x + speed * cos(wheelDir);
+    float y_ = y + speed * sin(wheelDir);
+    float dir_ = dir + alignBodyWithWheels();
 
-  void alignBodyWithWheels() {
+    Float[] returnFloat = {x_, y_, dir_};
+    return returnFloat;
+  }
+
+  float alignBodyWithWheels() {
+    float incrementDir;
+    
     if (drivingBackward && !drivingForward) {
-      dir += (-(dir-wheelDir)/4 * (speed/8))/2;
+      incrementDir = (-(dir-wheelDir)/4 * (speed/8))/2;
     } else {
-      dir += -(dir-wheelDir)/4 * (speed/8);
+      incrementDir = -(dir-wheelDir)/4 * (speed/8);
     }
+    
+    return incrementDir;
   }
 
   void updateTile(Tile tile) {
@@ -153,7 +166,22 @@ class Car {
     }
   }
 
-  void render() {
+  void render() { // leave empty
+  }
+
+  void drawCollision(color col) { // leave empty
+  }
+
+  void nitro() {
+    maxSpeed *= 2;
+    acceleration *= 3;
+    traction = 1;
+    handling /= 1.5;
+
+    nitro = true;
+  }
+
+  void disableNitro() {
   }
 }
 
@@ -194,6 +222,43 @@ class RedCar extends Car {
 
     // Body
     rectMode(CENTER);
+    rect(0, 0, w, h);
+
+    popMatrix();
+
+    // Wheels
+    pushMatrix();
+    translate(x, y);
+    rotate(dir);
+    translate(w/2, h/2);
+    rotate(wheelDir-dir);
+    rect(0, 0, w/4, h/4);
+    popMatrix();
+
+    pushMatrix();
+    translate(x, y);
+    rotate(dir);
+    translate(w/2, -h/2);
+    rotate(wheelDir-dir);
+    rect(0, 0, w/4, h/4);
+    popMatrix();
+
+    popStyle();
+  }
+
+  void drawCollision(color col) {
+    pushStyle();
+
+    rectMode(CENTER);
+    fill(col);
+
+    pushMatrix();
+
+    translate(x, y);
+
+    rotate(dir);
+
+    // Body
     rect(0, 0, w, h);
 
     popMatrix();

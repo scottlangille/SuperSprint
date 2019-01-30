@@ -2,7 +2,7 @@ class State_Game implements State {
 
   int track;
   int timeOfDay;
-  
+
   float startTime;
 
   ArrayList<Tile> tiles = new ArrayList();
@@ -18,6 +18,18 @@ class State_Game implements State {
     cars.get(0).updateTile(tiles.get(0));
   }
 
+  void collisionCheck() {
+    // SET COLOURS
+    background(100); // set background colour so no interference.
+    for (Tile tile : tiles) { // Draw tile collision colours
+      tile.drawCollision();
+    }
+    for (Car car : cars) { // Draw car over-top.
+      car.drawCollision(col_collision_car);
+    }
+    
+  }
+
   void update() {
     for (Tile t : tiles) {
       t.update();
@@ -27,6 +39,12 @@ class State_Game implements State {
       c.update();
     }
 
+    collisionCheck();
+    
+    for (Car c : cars) {
+      println(c.checkMove());
+      
+    }
 
     if (keyboard.checkKey((int)gameSettings.getProperty("upKey"))) {
       cars.get(0).drive(true); // Move forward
@@ -38,9 +56,9 @@ class State_Game implements State {
     } else {
       cars.get(0).unDrive(false); // Don't move backward
     }
-    
+
     // Turn car
-    
+
     if (keyboard.checkKey((int)gameSettings.getProperty("leftKey"))) {
       cars.get(0).turnWheels(0); // Turn left
     }
@@ -73,15 +91,18 @@ class State_Game implements State {
     for (Car c : cars) {
       c.render();
     }
-    
+
     //println(str((millis() - startTime)/1000).split(".")[0] + str((millis() - startTime)/1000).split(".")[1].substring(1));
-    
-    
-    
+
+
+
     popStyle();
   }
 
   void processKey(char k, int code) {
+    if (k == 'Q') {
+     cars.get(0).nitro(); 
+    }
   }
 
   void processClick() {
@@ -109,8 +130,16 @@ class State_Game implements State {
       y += 30;
     }
   }
-  
+
   void startRace() {
     startTime = millis();
   }
+
+  //void checkCollision(Car car) {
+  //  if (get(int(car.x), int(car.y)) == color(255, 255, 254)) {
+  //    car.nitro();
+  //    car.mapProperties();
+  //  }
+  //}
+
 }

@@ -1,16 +1,16 @@
 class Tile {
   /*
-   00 barrier
-   01 road1
-   02 road2  
-   03 road3
-   04 checkpoint
-   05 grass
-   06 oil
-   07 sand
-   08 ice
-   09 finish line
-   10 scenery
+   00 barrier            color(255, 0, 0)
+   01 road1              color(255, 255, 255)
+   02 road2              color(255, 255, 255)
+   03 road3              color(255, 255, 255)
+   04 checkpoint         
+   05 grass              
+   06 oil                
+   07 sand               
+   08 ice                
+   09 finish line        
+   10 scenery            color(255, 0, 0)
    */
   float x, y, w;
   float left, right, top, bot;
@@ -72,6 +72,36 @@ class Tile {
     rect(x, y, 30, 30);
 
 
+    popStyle();
+  }
+  
+  void drawCollision() {
+    color col = color(100); // if none
+      
+    if (type == 0 || type == 10) { // Barrier/scenery
+      col = col_collision_nothru;
+    } else if (type == 1 || type == 2 || type == 3) { // Roads
+      col = col_collision_road;
+    } else if (type == 4) { // Checkpoint
+      col = col_collision_checkpoint;
+    } else if (type == 5) { // Grass
+      col = col_collision_grass;
+    } else if (type == 6) { // Oil
+      col = col_collision_oil;
+    } else if (type == 7) { // Sand
+      col = col_collision_sand;
+    } else if (type == 8) { // Ice
+      col = col_collision_ice;
+    } else if (type == 9) { // Finish Line
+      col = col_collision_finish;
+    }
+    
+    pushStyle();
+    
+    rectMode(CORNER);
+    fill(col);
+    rect(x,y,30,30);
+    
     popStyle();
   }
 }

@@ -3,9 +3,8 @@
 // Last updated January 28, 2019
 
 /* TODO:
- - Car turn/move
  - Design a few tiles
- - 
+ - Collision
  */
 
 Settings gameSettings;
@@ -40,7 +39,7 @@ void draw() {
   pushStyle();
 
   gameState.update();  
-  gameState.render();
+  //gameState.render(); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   popStyle();
 }
@@ -121,8 +120,33 @@ void setupImages() {
 color col_titleHoverButton;
 color col_defaultButton;
 
+color col_collision_car; // BLACK
+color col_collision_nothru; // RED
+color col_collision_road; // WHITE
+color col_collision_grass; // GREENish
+color col_collision_oil; // BLUEish
+color col_collision_sand; // YELLOWish
+color col_collision_ice; // CYANish
+color col_collision_checkpoint; // YELLOW
+color col_collision_finish; // GREEN
+
+
 void setupColors() {
   col_titleHoverButton = color(241, 240, 0);
   col_defaultButton = color(255);
+
+
+  col_collision_car = color(0);
+  col_collision_nothru = color(255, 0, 0);
+
+  col_collision_road = color(255);
+
+  col_collision_grass = color(0, 0, 255) /2;
+  col_collision_oil = color(0, 0, 255) /2;
+  col_collision_sand = color(255, 255, 0) /2;
+  col_collision_ice = color(0, 255, 255) /2;
+
+  col_collision_checkpoint = color(255, 255, 0);
+  col_collision_finish = color(0, 255, 0);
 }
 ////////////////////////
